@@ -67,6 +67,15 @@ After you sign in you're asked to set up your plan, once:
 
 Right after creating the plan, Settings opens so you can import your existing To Do lists.
 
+## Hosting on GitHub Pages
+
+`.github/workflows/pages.yml` builds the app, runs the tests and publishes it to `https://<owner>.github.io/<repo>/` on every push to `main`.
+
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions.** (Pages for a private repository needs a paid GitHub plan, and the published site is public. That's fine here: the site is only the app, and your tasks stay behind Microsoft sign-in.)
+2. Optional: **Settings → Secrets and variables → Actions → Variables**, add `MSAL_CLIENT_ID` (and `MSAL_TENANT`) so nobody has to paste the client ID on the sign-in screen. The client ID is not a secret.
+3. Add `https://<owner>.github.io/<repo>/` as a Single-page application redirect URI on the Entra app registration.
+4. Push to `main`, or run the workflow by hand from the **Actions** tab.
+
 ## Things to know
 
 - **Beta Graph API.** Private (roster) plans and My Day are only available on the Microsoft Graph `beta` endpoint today, so the app uses `beta` for Planner and `v1.0` for everything else. Microsoft can change beta APIs. Your tenant admin can also turn off roster plans, in which case you can still use a group plan.
